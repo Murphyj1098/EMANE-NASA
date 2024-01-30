@@ -57,26 +57,6 @@ then
         $top_dir/persist/$node_name/var/run/emaneeventd.uuid
 fi
 
-# OLSRD or BATMAN
-# OLSRD
-if [ -f olsr.conf ]
-then
-    start_olsr \
-        $node_name \
-        olsr.conf \
-        $top_dir/persist/$node_name/var/log/olsr.log
-
-    wait_for_device $node_name bmf0 30
-fi
-
-# BATMAN-adv
-if [ -f batman-adv ]
-then
-    bash ./batman-adv $node_name
-
-    wait_for_device $node_name ${batman_interface} 30
-fi
-
 # OTestPoint-Recorder
 if [ -f otestpoint-recorder.xml ]
 then
